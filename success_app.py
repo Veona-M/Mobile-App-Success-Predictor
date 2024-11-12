@@ -15,12 +15,14 @@ import seaborn as sns
 model_path = 'models/app_success_model.keras'
 model = tf.keras.models.load_model(model_path)
 
-# Load the encoders from the saved files
-category_encoder = joblib.load('models/category_encoder.joblib')
-app_type_encoder = joblib.load('models/app_type_encoder.joblib')
-content_rating_encoder = joblib.load('models/content_rating_encoder.joblib')
-size_category_encoder = joblib.load('models/size_category_encoder.joblib')
+# Get the current working directory
+base_dir = os.getcwd()
 
+# Load encoders with absolute paths
+category_encoder = joblib.load(os.path.join(base_dir, 'models', 'category_encoder.joblib'))
+app_type_encoder = joblib.load(os.path.join(base_dir, 'models', 'app_type_encoder.joblib'))
+content_rating_encoder = joblib.load(os.path.join(base_dir, 'models', 'content_rating_encoder.joblib'))
+size_category_encoder = joblib.load(os.path.join(base_dir, 'models', 'size_category_encoder.joblib'))
 # Load the target encoder used during training (for decoding predictions)
 target_encoder = joblib.load('models/target_encoder.joblib')
 # Load the scaler used during training
